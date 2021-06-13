@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Chat Messenger</title>
+</head>
+
+<body>
+  <main>
+    <div class="chat-screen-group flex-dis">
+      <div class="chat-screen saras-screen">
+        <div class="chat-header">
+          <div class="initials margin-r20 weight700">OQ</div>
+          <h6 class="sender-name weight700 ft18 margin-0">Oliver Queen</h6>
+        </div>
+        <div class="chatwall custom-chatpgscroll">
+          <div class="chatscroll">
+            <ul class="chatgroup">
+              <li class="chatdate">22/05/2020</li>
+              <li class="chatxchg recvdchat">
+                <div class="initials">OQ</div>
+                <div class="xchgcontent">
+                  <p class="chat-body">
+                    Lorem ipsum dolor sit amet,
+                  </p>
+                  <small class="dark-grey-clr">Message sent by 2:13AM</small>
+                </div>
+              </li>
+              <li class="chatxchg sentchat">
+                <div class="xchgcontent">
+                  <p class="chat-body">
+                    Lorem ipsum dolor sit amet, placerat eget quis pellentesque, et vitae in risus ipsum nunc,
+                    magna ut semper sed sed donec mauris, sit nulla massa ac, velit sagittis. In pulvinar ac
+                    semper porttitor, suspendisse
+                  </p>
+                  <small class="dark-grey-clr">Message sent by 2:13AM</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chattextarea">
+            <textarea id="oqToSLInput" class="chattext-inputbox custom-chatpgscroll"
+              placeholder="Write A Message"></textarea>
+            <button id="oqToSLBtn" class="chattext-inputbtn" type="button">Send</button>
+          </div>
+        </div>
+      </div>
+      <div class="chat-screen olivers-screen">
+        <div class="chat-header light-blue-bg">
+          <div class="initials margin-r20 weight700">SL</div>
+          <h6 class="sender-name weight700 ft18 margin-0">Sara Lance</h6>
+        </div>
+        <div class="chatwall custom-chatpgscroll">
+          <div class="chatscroll">
+            <ul class="chatgroup">
+              <li class="chatdate">22/05/2020</li>
+              <li class="chatxchg recvdchat">
+                <div class="initials">SL</div>
+                <div class="xchgcontent">
+                  <p class="chat-body">
+                    Lorem ipsum dolor sit amet, placerat eget quis pellentesque, et vitae in risus ipsum nunc,
+                    magna ut semper sed sed donec mauris, sit nulla massa ac, velit sagittis. In pulvinar ac
+                    semper porttitor, suspendisse
+                  </p>
+                  <small class="dark-grey-clr">Message sent by 2:13AM</small>
+                </div>
+              </li>
+              <li class="chatxchg sentchat">
+                <div class="xchgcontent">
+                  <p class="chat-body">
+                    Lorem ipsum dolor sit amet,
+                  </p>
+                  <small class="dark-grey-clr">Message sent by 2:13AM</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chattextarea">
+            <textarea id="slToOQInput" class="chattext-inputbox custom-chatpgscroll"
+              placeholder="Write A Message"></textarea>
+            <button id="slToOQBtn" class="chattext-inputbtn" type="button">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="main.js"></script>
+</body>
+
+</html>
