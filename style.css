@@ -16,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
+  font-weight: 400;
   background-color: var(--bg-blue);
 }
 .flex-dis {
@@ -40,7 +41,6 @@ body {
   color: var(--dark-grey);
 }
 .chat-screen-group {
-  margin: 30px;
   max-width: 1400px;
   margin: 30px auto;
   justify-content: center;
@@ -66,7 +66,6 @@ body {
   margin-bottom: 30px;
   background: #fbfbfb;
   position: relative;
-  /* max-width: 1200px; */
 }
 .chatscroll ul.chatgroup {
   list-style: none;
@@ -94,8 +93,11 @@ ul.chatgroup li.chatdate {
 .chatgroup .chatxchg {
   width: 90%;
   display: flex;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   clear: both;
+}
+.chatgroup .chatxchg:last-of-type {
+  padding-bottom: 30px;
 }
 .chatgroup .chatxchg.sentchat {
   flex-direction: row-reverse;
@@ -122,7 +124,8 @@ ul.chatgroup li.chatdate {
   border: 1px solid var(--light-grey);
   border-radius: 2px;
   margin-bottom: 10px;
-  padding: 20px;
+  padding: 10px 20px;
+  white-space: pre-line;
 }
 .sentchat .xchgcontent small {
   display: block;
@@ -214,6 +217,11 @@ textarea.chattext-inputbox:focus {
 @media screen and (max-width: 768px) {
   .custom-chatpgscroll::-webkit-scrollbar {
     width: 0;
+  }
+}
+@media screen and (max-width: 675px) {
+  .chat-screen-group > * {
+    flex-grow: 1;
   }
 }
 @media screen and (max-width: 425px) {
