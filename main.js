@@ -29,50 +29,116 @@ const updateScreens = (btn) => {
     receiver = 'olivers-screen';
   }
 
-  let chatInput = document
+  const chatInput = document
     .querySelector(`.${sender} .chattext-inputbox`)
     .value.trim();
-  let contactInitials = document.querySelector(
+  const contactInitials = document.querySelector(
     `.${receiver} .chat-header .initials`
   );
-  let sentScreen = document.querySelector(`.${sender} .chatgroup`);
-  let receivedScreen = document.querySelector(`.${receiver} .chatgroup`);
-
-  let sentChat = createLiTag.cloneNode(true);
-  let recvdChat = createLiTag.cloneNode(true);
+  const sentScreen = document.querySelector(`.${sender} .chatgroup`);
+  const receivedScreen = document.querySelector(`.${receiver} .chatgroup`);
 
   if (chatInput !== '') {
-    getChatMessageBody(contactInitials, sentChat, recvdChat, chatInput);
+    const newLog = new messageFormat(
+      chatInput,
+      sender,
+      receiver,
+      contactInitials
+    );
+    newLog.msgItem();
+    console.log(msgArray);
+    const res = fecthNewChatItem();
     checkLastChatDate(sentScreen, receivedScreen);
-    appendElementWrapper(sentScreen, sentChat);
-    appendElementWrapper(receivedScreen, recvdChat);
+    appendElementWrapper(sentScreen, res.sent);
+    appendElementWrapper(receivedScreen, res.recvd);
     document.querySelector(`.${sender} .chattext-inputbox`).value = '';
   }
 };
 
-const getChatMessageBody = (
-  contactInitials,
-  sentChat,
-  recvdChat,
-  chatInput
-) => {
-  let initials = createDivTag.cloneNode(true);
-  initials.setAttribute('class', 'initials');
-  initials.textContent = contactInitials.textContent;
+const msgArray = [
+  {
+    msg: "Hey Sara. I took care of it!! Ra's is not going to be a problem for a while",
+    time: '11:32',
+    date: '22/05/2020',
+    sender: 'OLIVER',
+    receiver: 'SARA',
+    senderScreen: 'olivers-screen',
+    receiverScreen: 'saras-screen',
+    initials: 'OQ',
+  },
+  {
+    msg: " Yaay!! 💃 That's awesome, Ollie. I'm going share the news with the Legends now!",
+    time: '11:33',
+    date: '22/05/2020',
+    sender: 'OLIVER',
+    receiver: 'SARA',
+    senderScreen: 'saras-screen',
+    receiverScreen: 'olivers-screen',
+    initials: 'SL',
+  },
+  {
+    msg: 'Nate says we owe you BIG! 🍺',
+    time: '11:38',
+    date: '22/05/2020',
+    sender: 'OLIVER',
+    receiver: 'SARA',
+    senderScreen: 'saras-screen',
+    receiverScreen: 'olivers-screen',
+    initials: 'SL',
+  },
+  {
+    msg: 'Haha! My pleasure 😁',
+    time: '11:39',
+    date: '22/05/2020',
+    sender: 'OLIVER',
+    receiver: 'SARA',
+    senderScreen: 'olivers-screen',
+    receiverScreen: 'saras-screen',
+    initials: 'OQ',
+  },
+  {
+    msg: 'Hi over there!',
+    time: '02:15',
+    date: '24/05/2020',
+    sender: 'OLIVER',
+    receiver: 'SARA',
+    senderScreen: 'olivers-screen',
+    receiverScreen: 'saras-screen',
+    initials: 'OQ',
+  },
+  {
+    msg: "Cant's talk now. Explain later!!",
+    time: '02:20',
+    date: '24/05/2020',
+    sender: 'SARA',
+    receiver: 'OLIVER',
+    senderScreen: 'saras-screen',
+    receiverScreen: 'olivers-screen',
+    initials: 'SL',
+  },
+];
 
-  let chatMessageWrapper = createDivTag.cloneNode(true);
+const getChatMessageBody = (item) => {
+  const initials = createDivTag.cloneNode(true);
+  initials.setAttribute('class', 'initials');
+  initials.textContent = item.initials;
+
+  const chatMessageWrapper = createDivTag.cloneNode(true);
   chatMessageWrapper.setAttribute('class', 'xchgcontent');
 
-  let chatBody = createElementWrapper('p');
+  const chatBody = createElementWrapper('p');
   chatBody.setAttribute('class', 'chat-body');
-  chatBody.textContent = chatInput;
+  chatBody.textContent = item.msg;
 
-  let sentTime = createElementWrapper('small');
+  const sentTime = createElementWrapper('small');
   sentTime.setAttribute('class', 'dark-grey-clr');
-  sentTime.textContent = `Message sent by ${fetchTime()}`;
+  sentTime.textContent = `Message sent by ${item.time}`;
 
   appendElementWrapper(chatMessageWrapper, chatBody);
   appendElementWrapper(chatMessageWrapper, sentTime);
+
+  const sentChat = createLiTag.cloneNode(true);
+  const recvdChat = createLiTag.cloneNode(true);
 
   sentChat.setAttribute('class', 'chatxchg sentchat');
   appendElementWrapper(sentChat, chatMessageWrapper);
@@ -80,7 +146,79 @@ const getChatMessageBody = (
   recvdChat.setAttribute('class', 'chatxchg recvdchat');
   appendElementWrapper(recvdChat, initials);
   appendElementWrapper(recvdChat, chatMessageWrapper.cloneNode(true));
+
+  const msgBody = {
+    recvd: recvdChat,
+    sent: sentChat,
+  };
+  return msgBody;
 };
+
+const fecthNewChatItem = () => {
+  const itemIndex = msgArray.length - 1;
+  const newMsg = getChatMessageBody(msgArray[itemIndex]);
+  return newMsg;
+};
+
+const getStartChatMessageBody = () => {
+  msgArray.forEach((x) => {
+    const msg = getChatMessageBody(x);
+
+    const sentScreen = document.querySelector(`.${x.senderScreen} .chatgroup`);
+    const receivedScreen = document.querySelector(
+      `.${x.receiverScreen} .chatgroup`
+    );
+
+    const chatDate = newChatDate(true, x);
+
+    const lastChatDateContainer = document.querySelectorAll('.chatdate');
+    const lastChatDate =
+      lastChatDateContainer[lastChatDateContainer.length - 1];
+
+    if (
+      lastChatDateContainer.length < 1 ||
+      lastChatDate.textContent !== x.date
+    ) {
+      appendElementWrapper(sentScreen, chatDate);
+      appendElementWrapper(receivedScreen, chatDate.cloneNode(true));
+    }
+
+    appendElementWrapper(sentScreen, msg.sent);
+    appendElementWrapper(receivedScreen, msg.recvd);
+  });
+  scrolltoBottom();
+};
+
+class messageFormat {
+  constructor(chatBody, sender, receiver, initials) {
+    this.msgTime = fetchTime();
+    this.chatBody = chatBody;
+    this.sender = '';
+    this.receiver = '';
+    this.senderScreen = sender;
+    this.receiverScreen = receiver;
+    this.initials = initials;
+    this.msgDate = fetchDate();
+  }
+  formatSender() {
+    return (this.sender = this.senderScreen.slice(0, -8).toUpperCase());
+  }
+  formatReceiver() {
+    return (this.receiver = this.receiverScreen.slice(0, -8).toUpperCase());
+  }
+  msgItem() {
+    return msgArray.push({
+      msg: this.chatBody,
+      time: this.msgTime,
+      date: this.msgDate,
+      sender: this.formatSender(),
+      receiver: this.formatReceiver(),
+      senderScreen: this.senderScreen,
+      receiverScreen: this.receiverScreen,
+      initials: this.initials.textContent,
+    });
+  }
+}
 
 const fetchDate = () => {
   const today = new Date();
@@ -105,10 +243,14 @@ const fetchTime = () => {
   return time;
 };
 
-const newChatDate = () => {
+const newChatDate = (existing, x = {}) => {
   let newChatTag = createLiTag.cloneNode(true);
   newChatTag.setAttribute('class', 'chatdate');
-  newChatTag.textContent = fetchDate();
+  if (existing) {
+    newChatTag.textContent = x.date;
+  } else {
+    newChatTag.textContent = fetchDate();
+  }
   return newChatTag;
 };
 
@@ -117,7 +259,7 @@ const checkLastChatDate = (sentScreen, receivedScreen) => {
   let lastChatDate = lastChatDateContainer[lastChatDateContainer.length - 1];
   let todaysDate = fetchDate();
   if (lastChatDate.textContent !== todaysDate) {
-    let newDate = newChatDate();
+    let newDate = newChatDate(false);
     appendElementWrapper(sentScreen, newDate);
     appendElementWrapper(receivedScreen, newDate.cloneNode(true));
   }
@@ -133,3 +275,5 @@ const scrolltoBottom = () => {
     }
   });
 };
+
+getStartChatMessageBody();
