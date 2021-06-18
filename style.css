@@ -42,7 +42,7 @@ body {
 }
 .chat-screen-group {
   max-width: 1400px;
-  margin: 30px auto;
+  margin: 30px auto 0;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -63,9 +63,11 @@ body {
 }
 .chat-screen {
   height: calc(100vh - 110px);
-  margin-bottom: 30px;
   background: #fbfbfb;
   position: relative;
+}
+.chat-screen:first-of-type {
+  margin-bottom: 30px;
 }
 .chatscroll ul.chatgroup {
   list-style: none;
@@ -213,6 +215,19 @@ textarea.chattext-inputbox:focus {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='rgb(128, 128, 128)'><polygon points='0,0 100,0 50,50'/></svg>");
 }
 /* END: Custom scrollbar */
+footer {
+  text-align: center;
+}
+footer a {
+  text-decoration: none;
+  color: #000;
+  font-family: monospace;
+  font-size: 1rem;
+}
+footer a:hover {
+  text-decoration: underline;
+  color: inherit;
+}
 
 @media screen and (max-width: 768px) {
   .custom-chatpgscroll::-webkit-scrollbar {
