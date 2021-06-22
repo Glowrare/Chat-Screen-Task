@@ -11,6 +11,8 @@ A demo dual chat screen (mobile-friendly) design to simulate chat conversation b
 
 <br/>
 
+[See demo](https://chatscreendummy.netlify.app/)
+
 ---
 
 <br/>
